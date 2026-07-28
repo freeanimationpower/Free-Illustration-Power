@@ -1,4 +1,4 @@
-# FAP Draw — Programa de Ilustración Digital por Capas
+# Free Illustration Power — Programa de Ilustracion Digital por Capas
 
 ## 1. Presentación del Proyecto
 

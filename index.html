@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>FAP Draw — Ilustracion por Capas</title>
+<title>Free Illustration Power</title>
 <style>
 :root {
   --bg-primary: #15171c;
@@ -22,8 +22,8 @@
   --green-bg: #1e3a1e;
   --red: #e53935;
   --toolbar-h: 40px;
-  --brush-strip-h: 30px;
-  --color-strip-h: 30px;
+  --brush-strip-h: 44px;
+  --color-strip-h: 44px;
   --panel-w: 260px;
 }
 
@@ -134,15 +134,15 @@ body {
 
 /* ===== BRUSH STRIP ===== */
 .brush-strip {
-  display: flex; gap: 2px; padding: 1px 6px;
+  display: flex; gap: 4px; padding: 4px 6px;
   background: var(--bg-secondary);
-  overflow-x: auto; align-items: center;
+  overflow-x: auto; overflow-y: hidden; align-items: center;
   min-height: var(--brush-strip-h); height: var(--brush-strip-h);
   flex-shrink: 0;
 }
-.brush-strip::-webkit-scrollbar { height: 5px; }
-.brush-strip::-webkit-scrollbar-track { background: var(--bg-tertiary); border-radius: 2px; }
-.brush-strip::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 2px; }
+.brush-strip::-webkit-scrollbar { height: 14px; }
+.brush-strip::-webkit-scrollbar-track { background: var(--bg-tertiary); border-radius: 7px; }
+.brush-strip::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 7px; }
 .brush-btn {
   width: 26px; height: 26px; border: 1px solid transparent;
   border-radius: 4px; background: transparent; cursor: pointer;
@@ -155,6 +155,9 @@ body {
 .brush-btn.active img {
   filter: invert(55%) sepia(98%) saturate(2500%) hue-rotate(2deg) brightness(105%);
 }
+.brush-btn .brush-fb { width:20px;height:20px;display:flex;align-items:center;justify-content:center;font-size:6px;color:var(--text-secondary);display:none }
+.brush-btn .brush-fb.show { display:flex }
+.brush-btn img.hide { display:none }
 .brush-cat-sep {
   width: 1px; height: 22px; background: var(--border); flex-shrink: 0;
   margin: 0 4px;
@@ -163,19 +166,26 @@ body {
   font-size: 8px; color: var(--text-dim); flex-shrink: 0;
   text-transform: uppercase; letter-spacing: 0.5px; min-width: auto; padding: 0 3px;
 }
+.brush-cat-group {
+  display: flex; align-items: center; gap: 2px;
+  padding: 0 5px; flex-shrink: 0;
+}
+.brush-cat-group:nth-child(odd) { background: var(--bg-tertiary); }
+.brush-cat-group:nth-child(even) { background: var(--bg-secondary); }
+.brush-cat-group:first-child { border-left: 1px solid var(--accent); }
 
 /* ===== COLOR STRIP ===== */
 .color-strip {
-  display: flex; gap: 3px; padding: 1px 10px;
+  display: flex; gap: 5px; padding: 4px 10px;
   background: var(--bg-secondary); align-items: center;
   min-height: var(--color-strip-h); height: var(--color-strip-h);
-  flex-shrink: 0; overflow-x: auto;
+  flex-shrink: 0; overflow-x: auto; overflow-y: hidden;
 }
-.color-strip::-webkit-scrollbar { height: 5px; }
-.color-strip::-webkit-scrollbar-track { background: var(--bg-tertiary); border-radius: 2px; }
-.color-strip::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 2px; }
+.color-strip::-webkit-scrollbar { height: 14px; }
+.color-strip::-webkit-scrollbar-track { background: var(--bg-tertiary); border-radius: 7px; }
+.color-strip::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 7px; }
 .color-dot {
-  width: 22px; height: 22px; border-radius: 50%;
+  width: 28px; height: 28px; border-radius: 50%;
   border: 2px solid transparent; cursor: pointer; flex-shrink: 0;
   transition: transform 0.1s, border-color 0.1s;
 }
@@ -245,9 +255,9 @@ body {
   flex: 1; overflow-y: auto; overflow-x: hidden;
   padding: 2px 0;
 }
-.layers-scroll::-webkit-scrollbar { width: 6px; }
+.layers-scroll::-webkit-scrollbar { width: 14px; }
 .layers-scroll::-webkit-scrollbar-track { background: transparent; }
-.layers-scroll::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+.layers-scroll::-webkit-scrollbar-thumb { background: var(--border); border-radius: 7px; }
 
 .layer-row {
   display: flex; align-items: center; gap: 4px;
@@ -321,6 +331,17 @@ body {
 ::-webkit-scrollbar-track { background: var(--bg-tertiary); border-radius: 5px; }
 ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 5px; }
 ::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+#debugPanel{position:fixed;bottom:8px;left:8px;width:280px;background:rgba(0,0,0,.88);border:1px solid var(--border);border-radius:6px;padding:10px;font-size:11px;font-family:monospace;z-index:999;display:none;color:var(--text-primary);line-height:1.6;pointer-events:auto}
+#debugPanel.show{display:block}
+#debugPanel .dbg-title{font-weight:bold;color:var(--accent);margin-bottom:4px;font-size:12px}
+#debugPanel .dbg-row{display:flex;justify-content:space-between}
+#debugPanel .dbg-label{color:var(--text-secondary)}
+#debugPanel .dbg-val{color:var(--text-primary);max-width:180px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+#debugPanel .dbg-ok{color:var(--green)}
+#debugPanel .dbg-err{color:var(--red)}
+#debugPanel .dbg-warn{color:var(--accent-light)}
+#debugPanel .dbg-close{position:absolute;top:4px;right:6px;cursor:pointer;color:var(--text-dim);font-size:14px}
+#debugPanel .dbg-close:hover{color:var(--red)}
 </style>
 </head>
 <body>
@@ -381,6 +402,8 @@ body {
     <div class="tool-sep"></div>
     <div class="spacer"></div>
     <button class="btn btn-label" data-action="exportPNG" title="Export PNG (Ctrl+Shift+P)"><img class="ico" src="icons/export gif.png" alt="PNG"><span class="btn-text">png</span></button>
+    <button class="btn btn-label" data-action="exportJPG" title="Export JPG (Ctrl+Shift+J)"><img class="ico" src="icons/export gif.png" alt="JPG"><span class="btn-text">jpg</span></button>
+    <button class="btn btn-label" data-action="exportEPS" title="Export EPS (Ctrl+Shift+E)"><img class="ico" src="icons/export video.png" alt="EPS"><span class="btn-text">eps</span></button>
     <button class="btn btn-label" data-action="saveProject" title="Save Project (Ctrl+S)"><img class="ico" src="icons/save project.png" alt="Save"><span class="btn-text">save</span></button>
     <button class="btn btn-label" data-action="openProject" title="Open Project (Ctrl+O)"><img class="ico" src="icons/open project.png" alt="Open"><span class="btn-text">open</span></button>
     <div class="tool-sep"></div>
@@ -425,6 +448,8 @@ body {
         <div class="sc-row"><span class="sc-key">Ctrl + S</span><span class="sc-desc">Guardar Proyecto (.fapd)</span></div>
         <div class="sc-row"><span class="sc-key">Ctrl + O</span><span class="sc-desc">Abrir Proyecto (.fapd)</span></div>
         <div class="sc-row"><span class="sc-key">Ctrl+Shift+P</span><span class="sc-desc">Exportar PNG</span></div>
+        <div class="sc-row"><span class="sc-key">Ctrl+Shift+J</span><span class="sc-desc">Exportar JPG</span></div>
+        <div class="sc-row"><span class="sc-key">Ctrl+Shift+E</span><span class="sc-desc">Exportar EPS</span></div>
       </div>
     </div>
   </div>
@@ -481,6 +506,8 @@ body {
 
 </div>
 
+<div id="debugPanel"><span class="dbg-close" onclick="this.parentElement.classList.remove('show')" title="Cerrar">&times;</span><div class="dbg-title">DEBUG TRACER</div><div class="dbg-row"><span class="dbg-label">Pincel:</span><span class="dbg-val" id="dbgBrush">-</span></div><div class="dbg-row"><span class="dbg-label">Ruta:</span><span class="dbg-val" id="dbgPath">-</span></div><div class="dbg-row"><span class="dbg-label">Handler:</span><span class="dbg-val" id="dbgHandler">-</span></div><div class="dbg-row"><span class="dbg-label">Estado:</span><span class="dbg-val dbg-ok" id="dbgStatus">OK</span></div><div class="dbg-row"><span class="dbg-label">Alpha/CompOp:</span><span class="dbg-val" id="dbgCanvasState">-</span></div></div>
+
 <script>
 // ===== STATE =====
 const state = {
@@ -493,6 +520,30 @@ let isPanning = false, panStartX = 0, panStartY = 0, panStartPanX = 0, panStartP
 let isDrawing = false, lastX = 0, lastY = 0, lastPressure = 0.5;
 let spaceHeld = false, spaceDidPan = false, preSpaceTool = null;
 let exportCounter = 0;
+let DEBUG = false;
+function dbg(cat,msg,data){
+  if(!DEBUG)return;
+  var c=cat==='OK'?'#4caf50':cat==='ERR'?'#e53935':cat==='WARN'?'#ffab40':'#00bcd4';
+  console.log('%c['+cat+']%c '+msg,'color:'+c+';font-weight:bold','color:#ccc',data||'');
+}
+function updateDebugPanel(brName,path,handler,status,canvasInfo){
+  if(!DEBUG)return;
+  var ep=document.getElementById('debugPanel');
+  if(!ep)return;
+  document.getElementById('dbgBrush').textContent=brName||'-';
+  document.getElementById('dbgPath').textContent=path||'-';
+  document.getElementById('dbgHandler').textContent=handler||'-';
+  var es=document.getElementById('dbgStatus');es.textContent=status||'OK';
+  es.className='dbg-val dbg-'+(status==='ERR'?'err':status==='WARN'?'warn':'ok');
+  document.getElementById('dbgCanvasState').textContent=canvasInfo||'-';
+}
+function toggleDebug(){
+  DEBUG=!DEBUG;
+  var ep=document.getElementById('debugPanel');
+  if(ep){if(DEBUG)ep.classList.add('show');else ep.classList.remove('show');}
+  if(DEBUG){dbg('OK','DEBUG ACTIVADO - presiona Ctrl+Shift+D para desactivar');updateDebugPanel('-','-','-','OK','-');}
+  else console.log('DEBUG DESACTIVADO');
+}
 
 // ===== LAYER SYSTEM =====
 let layers = [];
@@ -503,9 +554,6 @@ const MAX_UNDO = 30;
 function createLayerCanvas(w, h) {
   var c = document.createElement('canvas');
   c.width = w; c.height = h;
-  var lctx = c.getContext('2d');
-  lctx.fillStyle = '#FFFFFF';
-  lctx.fillRect(0, 0, w, h);
   return c;
 }
 
@@ -598,6 +646,7 @@ fitCanvasSurface();
 window.addEventListener('resize', function() { fitCanvasSurface(); renderLayerPanel(); });
 
 layers.push(newLayer('Fondo'));
+layers[0].canvas.getContext('2d').fillStyle = '#FFFFFF'; layers[0].canvas.getContext('2d').fillRect(0, 0, CANVAS_W, CANVAS_H);
 
 // ===== RENDER =====
 function renderComposite() {
@@ -617,6 +666,11 @@ function renderComposite() {
 
 function syncLayerBuffer() {
   var al = getActiveLayer();
+  lbCtx.globalAlpha = 1;
+  lbCtx.globalCompositeOperation = 'source-over';
+  lbCtx.filter = 'none';
+  lbCtx.shadowBlur = 0;
+  lbCtx.imageSmoothingEnabled = true;
   lbCtx.clearRect(0, 0, layerBuffer.width, layerBuffer.height);
   lbCtx.drawImage(al.canvas, 0, 0);
 }
@@ -624,6 +678,11 @@ function syncLayerBuffer() {
 function flushLayerBuffer() {
   var al = getActiveLayer();
   var alc = al.canvas.getContext('2d');
+  alc.globalAlpha = 1;
+  alc.globalCompositeOperation = 'source-over';
+  alc.filter = 'none';
+  alc.shadowBlur = 0;
+  alc.imageSmoothingEnabled = true;
   alc.clearRect(0, 0, al.canvas.width, al.canvas.height);
   alc.drawImage(layerBuffer, 0, 0);
 }
@@ -746,6 +805,18 @@ function shouldSkipGrain(x, y, intensity) {
   return paperGrain(x, y, intensity) < 0.35;
 }
 
+// ===== SEEDED PRNG (ctx/lbCtx consistency) =====
+var _rngSeed = 1;
+function setRngSeed(s) { _rngSeed = (s | 0) || 1; }
+function rngNext() { _rngSeed ^= _rngSeed << 13; _rngSeed ^= _rngSeed >>> 17; _rngSeed ^= _rngSeed << 5; return ((_rngSeed & 0x7fffffff) / 0x7fffffff); }
+var _origMathRandom = Math.random;
+function withSameSeed(x, y, j, ei, fn) {
+  setRngSeed(((Math.floor(x * 10000) * 31 + Math.floor(y * 100) * 53 + j * 37 + (ei || 0) * 101) | 0) || 1);
+  Math.random = rngNext;
+  fn();
+  Math.random = _origMathRandom;
+}
+
 // ===== 94 BRUSHES =====
 const BRUSHES = {
   round:       { cat:'classic', cap:'round', join:'round', scale:1.0, alpha:1.0, category:'classic', label:'Redondo' },
@@ -800,9 +871,9 @@ const BRUSHES = {
   w27_gouacheSemi:    { cat:'water', cap:'round', join:'round', scale:1.5, alpha:0.35, category:'watercolor', gouacheSemi:true, label:'Gouache Semi-transp' },
 
   // Efectos Especiales (w28-w30)
-  w28_saltEffect:     { cat:'water', cap:'round', join:'round', scale:2.2, alpha:0.12, category:'watercolor', saltEffect:true, label:'Efecto Sal' },
-  w29_alcoholDrops:   { cat:'water', cap:'round', join:'round', scale:2.0, alpha:0.10, category:'watercolor', alcoholDrops:true, label:'Gotas de Alcohol' },
-  w30_lifting:        { cat:'water', cap:'round', join:'round', scale:2.5, alpha:0.04, category:'watercolor', lifting:true, label:'Levantado/Secado' },
+  w28_saltEffect:     { cat:'water', cap:'round', join:'round', scale:2.2, alpha:0.25, category:'watercolor', saltEffect:true, label:'Efecto Sal' },
+  w29_alcoholDrops:   { cat:'water', cap:'round', join:'round', scale:2.0, alpha:0.22, category:'watercolor', alcoholDrops:true, label:'Gotas de Alcohol' },
+  w30_lifting:        { cat:'water', cap:'round', join:'round', scale:2.5, alpha:0.18, category:'watercolor', lifting:true, label:'Levantado/Secado' },
 
   // Oleo (o01-o04)
   o01_paletteKnife:   { cat:'oil', cap:'square', join:'miter', scale:1.4, alpha:0.85, category:'oil', oilKnife:true, label:'Espatula de Oleo' },
@@ -871,6 +942,7 @@ const BRUSHES = {
 function setBrushStyle(c, br, color, alpha, lw) {
   c.fillStyle = color; c.strokeStyle = color;
   c.globalAlpha = alpha;
+  c.globalCompositeOperation = state.activeTool === 'eraser' ? 'destination-out' : 'source-over';
   c.lineWidth = Math.max(0.5, lw);
   c.lineCap = br.cap; c.lineJoin = br.join;
   c.shadowBlur = 0; c.shadowColor = 'transparent'; c.filter = 'none';
@@ -1118,11 +1190,11 @@ function renderBrushSegment(c, br, color, alpha, lw, x, y, dx, dy, dist, pp) {
     }
 
   } else if (br.saltEffect) {
-    c.globalAlpha = alpha*0.4; c.beginPath(); c.arc(x, y, sz*0.7, 0, Math.PI*2); c.fill();
+    c.globalAlpha = alpha*0.9; c.beginPath(); c.arc(x, y, sz*0.7, 0, Math.PI*2); c.fill();
     var sn = 6+Math.floor(fl*10);
     for (var si=0; si<sn; si++) {
       var six=x+(Math.random()-0.5)*sz*2.2, siy=y+(Math.random()-0.5)*sz*2.2, sis=sz*(0.08+Math.random()*0.2);
-      c.save(); c.globalCompositeOperation='destination-out'; c.globalAlpha=0.6+Math.random()*0.4;
+      c.save(); c.globalCompositeOperation='destination-out'; c.globalAlpha=0.75+Math.random()*0.25;
       var ss=3+Math.floor(Math.random()*3);
       for (var si2=0; si2<ss; si2++) {
         var sia=si2/ss*Math.PI*2+Math.random()*0.3;
@@ -1133,15 +1205,15 @@ function renderBrushSegment(c, br, color, alpha, lw, x, y, dx, dy, dist, pp) {
 
   } else if (br.alcoholDrops) {
     for (var j = 0; j < 3; j++) {
-      c.globalAlpha = alpha*(0.3+j*0.1);
+      c.globalAlpha = alpha*(0.5+j*0.15);
       c.beginPath(); c.arc(x, y, sz*(1.2-j*0.25), 0, Math.PI*2); c.fill();
     }
     var ac=2+Math.floor(Math.random()*3);
     for (var ai=0; ai<ac; ai++) {
       var adr=sz*(0.35+Math.random()*0.5), adx=x+(Math.random()-0.5)*sz*2.5, ady=y+(Math.random()-0.5)*sz*2.5;
-      c.save(); c.globalCompositeOperation='destination-out'; c.globalAlpha=0.5+Math.random()*0.4;
+      c.save(); c.globalCompositeOperation='destination-out'; c.globalAlpha=0.7+Math.random()*0.3;
       c.beginPath(); c.arc(adx,ady,adr,0,Math.PI*2); c.fill();
-      c.globalCompositeOperation='source-over'; c.globalAlpha=alpha*1.2;
+      c.globalCompositeOperation='source-over'; c.globalAlpha=alpha*0.9;
       c.lineWidth=Math.max(0.3, sz*0.12); c.beginPath(); c.arc(adx,ady,adr,0,Math.PI*2); c.stroke();
       c.restore();
     }
@@ -1149,11 +1221,11 @@ function renderBrushSegment(c, br, color, alpha, lw, x, y, dx, dy, dist, pp) {
   } else if (br.lifting) {
     c.save(); c.globalCompositeOperation='destination-out';
     for (var j = 0; j < 3; j++) {
-      c.globalAlpha = 0.12+j*0.05;
+      c.globalAlpha = 0.2+j*0.08;
       c.beginPath(); c.arc(x+(Math.random()-0.5)*sz*1.5*sf, y+(Math.random()-0.5)*sz*1.5*sf, sz*(0.85-j*0.15), 0, Math.PI*2); c.fill();
     }
     c.restore();
-    c.globalAlpha = alpha*0.25; c.beginPath(); c.arc(x, y, sz*0.4, 0, Math.PI*2); c.fill();
+    c.globalAlpha = alpha*0.7; c.beginPath(); c.arc(x, y, sz*0.4, 0, Math.PI*2); c.fill();
 
   } else if (br.oilKnife) {
     var kw=sz*1.8, kh=sz*0.5;
@@ -1323,6 +1395,7 @@ function startDraw(e) {
   }
 
   isDrawing = true;
+  if(DEBUG){dbg('INFO','INICIO: '+state.brushType+' size:'+state.brushSize+' op:'+state.brushOpacity);}
   syncLayerBuffer();
   saveUndoState();
 
@@ -1330,15 +1403,16 @@ function startDraw(e) {
   lastX = p.x; lastY = p.y; lastPressure = p.pressure || 0.5;
 
   var br = BRUSHES[state.brushType] || BRUSHES.round;
-  var color = state.activeTool === 'eraser' ? '#FFFFFF' : state.activeColor;
+  var color = state.activeTool === 'eraser' ? '#000000' : state.activeColor;
   var dpr = drawCanvas.width / 200;
   var lw = (br.fixed || state.brushSize * br.scale) * dpr;
   var pp = applyPressureParams(br, lastPressure);
+  var dotSize = lw * (0.2+lastPressure*0.8) * (pp.size||1);
 
-  setBrushStyle(ctx, br, color, state.brushOpacity/100*br.alpha, lw);
-  setBrushStyle(lbCtx, br, color, state.brushOpacity/100*br.alpha, lw);
-  renderBrushDot(ctx, br, color, state.brushOpacity/100*br.alpha, lw, p.x, p.y, pp);
-  renderBrushDot(lbCtx, br, color, state.brushOpacity/100*br.alpha, lw, p.x, p.y, pp);
+  setBrushStyle(ctx, br, color, state.brushOpacity/100*br.alpha, dotSize);
+  setBrushStyle(lbCtx, br, color, state.brushOpacity/100*br.alpha, dotSize);
+  withSameSeed(p.x, p.y, 0, 0, function(){ renderBrushDot(ctx, br, color, state.brushOpacity/100*br.alpha, dotSize, p.x, p.y, pp); });
+  withSameSeed(p.x, p.y, 0, 0, function(){ renderBrushDot(lbCtx, br, color, state.brushOpacity/100*br.alpha, dotSize, p.x, p.y, pp); });
 
   drawCanvas.setPointerCapture(e.pointerId);
   updateBrushCursor(e);
@@ -1356,7 +1430,7 @@ function moveDraw(e) {
 
   var events = e.getCoalescedEvents ? e.getCoalescedEvents() : [e];
   var br = BRUSHES[state.brushType] || BRUSHES.round;
-  var color = state.activeTool === 'eraser' ? '#FFFFFF' : state.activeColor;
+  var color = state.activeTool === 'eraser' ? '#000000' : state.activeColor;
   var dpr = drawCanvas.width / 200;
   var lw = (br.fixed || state.brushSize * br.scale) * dpr;
   var baseAlpha = state.brushOpacity/100 * br.alpha;
@@ -1382,8 +1456,8 @@ function moveDraw(e) {
       var ix = lastX+dx*t, iy = lastY+dy*t;
       setBrushStyle(ctx, br, color, scaledAlpha, scaledSize);
       setBrushStyle(lbCtx, br, color, scaledAlpha, scaledSize);
-      renderBrushSegment(ctx, br, color, scaledAlpha, scaledSize, ix, iy, dist>0?dx/dist:0, dist>0?dy/dist:0, steps>0?dist/steps:0, pp);
-      renderBrushSegment(lbCtx, br, color, scaledAlpha, scaledSize, ix, iy, dist>0?dx/dist:0, dist>0?dy/dist:0, steps>0?dist/steps:0, pp);
+      withSameSeed(ix, iy, j, ei, function(){ renderBrushSegment(ctx, br, color, scaledAlpha, scaledSize, ix, iy, dist>0?dx/dist:0, dist>0?dy/dist:0, steps>0?dist/steps:0, pp); });
+      withSameSeed(ix, iy, j, ei, function(){ renderBrushSegment(lbCtx, br, color, scaledAlpha, scaledSize, ix, iy, dist>0?dx/dist:0, dist>0?dy/dist:0, steps>0?dist/steps:0, pp); });
     }
     lastX = p.x; lastY = p.y;
   }
@@ -1409,6 +1483,7 @@ function endDraw(e) {
   }
   if (isDrawing) {
     isDrawing = false;
+    if(DEBUG){ try{ var cs=ctx.globalAlpha!==1||ctx.globalCompositeOperation!=='source-over'||ctx.shadowBlur!==0; var ci=cs?'a:'+ctx.globalAlpha.toFixed(2)+' co:'+ctx.globalCompositeOperation:'OK'; dbg(cs?'WARN':'OK','FIN: '+state.brushType+' canvas:'+(cs?'DIRTY '+ci:'limpio')); updateDebugPanel(state.brushType,'endDraw',cs?'state-dirty':'clean',cs?'WARN':'OK',ci); }catch(e){} }
     flushLayerBuffer(); renderComposite();
   }
   document.getElementById('brushCursor').style.display = 'none';
@@ -1506,15 +1581,31 @@ for (var ci = 0; ci < brushCategories.length; ci++) {
 
 function renderBrushStrip() {
   var html = '';
+  var iconMap = { hatch: 'crosshatch',
+    w01_wetWash:'aguada humeda redonda', w02_wetFlat:'agua plana humeda', w03_wetBloom:'floracion humeda', w04_wetDetail:'detalle humedo', w05_wetBlend:'mezcla humeda',
+    w06_dryRound:'textura seca redonda', w07_dryGranulation:'granulacion seca', w08_dryRough:'seco aspero', w09_dryLiner:'perfilador seco', w10_drySalt:'textura con sal',
+    w11_gradedWash:'lavado degradado', w12_variegatedWash:'lavado variegado', w13_flatWash:'lavado plano', w14_wetInWet:'humedo sobre humedo',
+    w15_softEdge:'borde suave', w16_hardEdge:'borde duro', w17_bleedingEdge:'borde sangrado', w18_featheredEdge:'borde plumoso',
+    w19_coldPress:'papel prensado frio', w20_hotPress:'papel prensado caliente', w21_roughPaper:'papel rugoso',
+    w22_fineSplatter:'salpicadura fina', w23_dripWater:'goteo de agua', w24_bloomSplash:'salpicadura con floracion',
+    w25_indiaInk:'tinta china', w26_gouacheOpaque:'gouche opaco', w27_gouacheSemi:'gouche semi transparente',
+    w28_saltEffect:'efecto sal', w29_alcoholDrops:'gotas de alcohol', w30_lifting:'levantado secado',
+    o01_paletteKnife:'espatula de oleo', o02_bristle:'cerda de oleo', o03_impasto:'empaste de oleo', o04_blender:'difumino de oleo'
+  };
   for (var ci = 0; ci < brushCategories.length; ci++) {
-    if (ci > 0) html += '<div class="brush-cat-sep"></div>';
+    html += '<div class="brush-cat-group">';
     html += '<span class="brush-cat-label">'+brushCategories[ci].label+'</span>';
     for (var bi = 0; bi < brushCategories[ci].brushes.length; bi++) {
       var bk = brushCategories[ci].brushes[bi];
       var br = BRUSHES[bk];
-      html += '<button class="brush-btn'+(state.brushType===bk?' active':'')+'" data-brush="'+bk+'" title="'+br.label+'">';
-      html += '<div style="width:20px;height:20px;display:flex;align-items:center;justify-content:center;font-size:6px;color:var(--text-secondary)">'+br.label.slice(0,4)+'</div></button>';
+      var iconName = iconMap[bk] || bk;
+      var tip = br.label;
+      html += '<button class="brush-btn'+(state.brushType===bk?' active':'')+'" data-brush="'+bk+'" title="'+tip+'">';
+      html += '<img src="icons/brushes/'+iconName+'.png" onerror="this.classList.add(\'hide\');this.nextElementSibling.classList.add(\'show\')" alt="">';
+      html += '<span class="brush-fb">'+br.label.slice(0,4)+'</span>';
+      html += '</button>';
     }
+    html += '</div>';
   }
   document.getElementById('brushStrip').innerHTML = html;
 }
@@ -1523,6 +1614,7 @@ renderBrushStrip();
 document.getElementById('brushStrip').addEventListener('click', function(e) {
   var btn = e.target.closest('.brush-btn'); if (!btn) return;
   state.brushType = btn.dataset.brush;
+  if(DEBUG){ var br=BRUSHES[btn.dataset.brush]; var fl=[]; for(var k in br){ if(typeof br[k]==='boolean'&&br[k])fl.push(k); } dbg('OK','SELECT: '+btn.dataset.brush+' ('+br.label+') cat:'+(br.cat||'?')+' flags:'+fl.join(',')); updateDebugPanel(btn.dataset.brush,'select',fl.join(','),'OK','-'); }
   this.querySelectorAll('.brush-btn').forEach(function(b){b.classList.remove('active');});
   btn.classList.add('active');
 });
@@ -1619,7 +1711,8 @@ document.getElementById('toolbar').addEventListener('click', function(e) {
   var btn = e.target.closest('.btn'); if (!btn||!btn.dataset.action) return;
   switch(btn.dataset.action) {
     case 'undo': undoStroke(); break; case 'redo': redoStroke(); break;
-    case 'exportPNG': exportPNG(); break; case 'saveProject': saveProject(); break;
+    case 'exportPNG': exportPNG(); break; case 'exportJPG': exportJPG(); break; case 'exportEPS': exportEPS(); break;
+    case 'saveProject': saveProject(); break;
     case 'openProject': document.getElementById('openFileInput').click(); break;
     case 'toolBrush': setTool('brush'); break; case 'toolEraser': setTool('eraser'); break;
     case 'toolFill': setTool('fill'); break; case 'toolHand': setTool('hand'); break;
@@ -1662,6 +1755,7 @@ canvasSurface.addEventListener('wheel', function(e) {
 
 // ===== KEYBOARD =====
 document.addEventListener('keydown', function(e) {
+  if (e.ctrlKey&&e.shiftKey&&e.key.toLowerCase()==='d'){ e.preventDefault(); toggleDebug(); return; }
   if (e.target.tagName==='INPUT'||e.target.tagName==='SELECT'||e.target.tagName==='TEXTAREA') return;
   if (e.code==='Space'&&!e.repeat) { e.preventDefault(); spaceHeld=true;spaceDidPan=false; if(state.activeTool!=='hand'){preSpaceTool=state.activeTool;setTool('hand');}else{preSpaceTool=null;} return; }
   var ctrl=e.ctrlKey||e.metaKey, shift=e.shiftKey;
@@ -1671,6 +1765,8 @@ document.addEventListener('keydown', function(e) {
   if (ctrl&&e.key.toLowerCase()==='s') { e.preventDefault();saveProject();return; }
   if (ctrl&&e.key.toLowerCase()==='o') { e.preventDefault();document.getElementById('openFileInput').click();return; }
   if (ctrl&&shift&&e.key.toLowerCase()==='p') { e.preventDefault();exportPNG();return; }
+  if (ctrl&&shift&&e.key.toLowerCase()==='j') { e.preventDefault();exportJPG();return; }
+  if (ctrl&&shift&&e.key.toLowerCase()==='e') { e.preventDefault();exportEPS();return; }
   if (ctrl&&!shift&&e.key.toLowerCase()==='n') { e.preventDefault();addLayer();return; }
   if (ctrl&&!shift&&e.key.toLowerCase()==='j') { e.preventDefault();duplicateLayer(activeLayerIndex);return; }
   if (ctrl&&!shift&&e.key==='Delete') { e.preventDefault();removeLayer(activeLayerIndex);return; }
@@ -1692,18 +1788,49 @@ document.addEventListener('keyup', function(e) {
 });
 
 // ===== EXPORT =====
-function exportPNG() {
-  var ec=document.createElement('canvas'); ec.width=drawCanvas.width; ec.height=drawCanvas.height;
-  var ect=ec.getContext('2d'); ect.fillStyle='#FFFFFF'; ect.fillRect(0,0,ec.width,ec.height);
-  for (var i=0;i<layers.length;i++) {
-    var l=layers[i]; if(!l.visible) continue;
-    if (l.opacity<1){ect.globalAlpha=l.opacity;ect.drawImage(l.canvas,0,0);ect.globalAlpha=1;}
-    else ect.drawImage(l.canvas,0,0);
+function renderExportCanvas() {
+  var ec = document.createElement('canvas'); ec.width = drawCanvas.width; ec.height = drawCanvas.height;
+  var ect = ec.getContext('2d'); ect.fillStyle = '#FFFFFF'; ect.fillRect(0, 0, ec.width, ec.height);
+  for (var i = 0; i < layers.length; i++) {
+    var l = layers[i]; if (!l.visible) continue;
+    if (l.opacity < 1) { ect.globalAlpha = l.opacity; ect.drawImage(l.canvas, 0, 0); ect.globalAlpha = 1; }
+    else ect.drawImage(l.canvas, 0, 0);
   }
-  ec.toBlob(function(b){ downloadBlob(b, nextExportName('png')); }, 'image/png');
+  return ec;
+}
+function exportPNG() { var ec = renderExportCanvas(); ec.toBlob(function(b){ downloadBlob(b, nextExportName('png')); }, 'image/png'); }
+function exportJPG() { var ec = renderExportCanvas(); ec.toBlob(function(b){ downloadBlob(b, nextExportName('jpg')); }, 'image/jpeg', 0.92); }
+
+function ascii85Encode(bytes) {
+  var result = '', group = 0, count = 0, padding = 0;
+  for (var i = 0; i < bytes.length; i += 4) {
+    var n = 0; padding = 0;
+    for (var j = 0; j < 4; j++) {
+      n = n * 256 + ((i + j < bytes.length) ? (bytes.charCodeAt(i + j) & 255) : (padding++, 0));
+    }
+    if (n === 0 && padding === 0) { result += 'z'; continue; }
+    var chars = ''; for (var j = 0; j < 5 - padding; j++) { chars = String.fromCharCode(33 + (n % 85)) + chars; n = Math.floor(n / 85); }
+    result += chars;
+    if ((group += 5 - padding) >= 70) { result += '\n'; group = 0; }
+  }
+  return result + '~>';
 }
 
-function nextExportName(ext) { exportCounter++; return 'FAP_DRAW_'+ (exportCounter<10?'0'+exportCounter:''+exportCounter) +'.'+ext; }
+function exportEPS() {
+  var ec = renderExportCanvas();
+  var jpegData = ec.toDataURL('image/jpeg', 0.92);
+  var jpegBytes = atob(jpegData.split(',')[1]);
+  var a85 = ascii85Encode(jpegBytes);
+  var w = ec.width, h = ec.height;
+  var eps = '%!PS-Adobe-3.0 EPSF-3.0\n%%BoundingBox: 0 0 ' + w + ' ' + h + '\n%%Creator: Free Illustration Power\n%%LanguageLevel: 2\n%%EndComments\n';
+  eps += 'gsave\n0 ' + h + ' translate\n' + w + ' -' + h + ' scale\n/DeviceRGB setcolorspace\n';
+  eps += '<< /ImageType 1 /Width ' + w + ' /Height ' + h + ' /BitsPerComponent 8\n';
+  eps += '/ImageMatrix [' + w + ' 0 0 -' + h + ' 0 ' + h + ']\n/DataSource currentfile /ASCII85Decode filter /DCTDecode filter >> image\n';
+  eps += a85 + '\ngrestore\nshowpage\n';
+  downloadBlob(new Blob([eps], { type: 'application/postscript' }), nextExportName('eps'));
+}
+
+function nextExportName(ext) { exportCounter++; return 'FIP_'+ (exportCounter<10?'0'+exportCounter:''+exportCounter) +'.'+ext; }
 function downloadBlob(blob, fn) { var u=URL.createObjectURL(blob); var a=document.createElement('a'); a.href=u;a.download=fn;a.click(); setTimeout(function(){URL.revokeObjectURL(u);},500); }
 
 // ===== SAVE / LOAD =====
@@ -1742,9 +1869,9 @@ function loadProjectFile(file) {
         }
       })(i);}
       Promise.all(pl).then(function(){
-        layers=nl.filter(function(l){return!!l;}); if(!layers.length) layers.push(newLayer('Fondo'));
+        layers=nl.filter(function(l){return!!l;}); if(!layers.length) { layers.push(newLayer('Fondo')); layers[0].canvas.getContext('2d').fillStyle='#FFFFFF'; layers[0].canvas.getContext('2d').fillRect(0,0,CANVAS_W,CANVAS_H); }
         activeLayerIndex=0; renderLayerPanel(); selectLayer(0);
-        console.log('FAP Draw: '+layers.length+' capas cargadas');
+        console.log('Free Illustration Power: '+layers.length+' capas cargadas');
       });
     } catch(err){ alert('Archivo .fapd invalido.'); console.error(err); }
   }; r.readAsText(file);
