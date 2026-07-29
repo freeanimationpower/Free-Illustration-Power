@@ -674,7 +674,6 @@ fitCanvasSurface();
 window.addEventListener('resize', function() { fitCanvasSurface(); renderLayerPanel(); });
 
 layers.push(newLayer('Fondo'));
-layers[0].canvas.getContext('2d').fillStyle = '#FFFFFF'; layers[0].canvas.getContext('2d').fillRect(0, 0, CANVAS_W, CANVAS_H);
 
 // ===== RENDER =====
 function renderComposite() {
@@ -1899,7 +1898,7 @@ function loadProjectFile(file) {
         }
       })(i);}
       Promise.all(pl).then(function(){
-        layers=nl.filter(function(l){return!!l;}); if(!layers.length) { layers.push(newLayer('Fondo')); layers[0].canvas.getContext('2d').fillStyle='#FFFFFF'; layers[0].canvas.getContext('2d').fillRect(0,0,CANVAS_W,CANVAS_H); }
+        layers=nl.filter(function(l){return!!l;}); if(!layers.length) { layers.push(newLayer('Fondo')); }
         activeLayerIndex=0; renderLayerPanel(); selectLayer(0);
         console.log('Free Illustration Power: '+layers.length+' capas cargadas');
       });

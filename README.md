@@ -492,7 +492,8 @@ D:\FAP WEB\programa de dibujo\
 
 | Cambio | Descripcion |
 |---|---|
-| Capas transparentes | `createLayerCanvas()` ya no rellena con blanco. Solo la capa "Fondo" inicial es blanca |
+| Capas transparentes | `createLayerCanvas()` no rellena con blanco. `renderComposite()` provee fondo blanco visual |
+| Fondo sin blanco solido | La capa "Fondo" ya no tiene relleno blanco opaco (causaba que al reordenar capas el Fondo tapara todo) |
 | Borrador transparente | Usa `globalCompositeOperation = 'destination-out'` en vez de pintar blanco |
 | Canvas state limpio | `syncLayerBuffer()` y `flushLayerBuffer()` resetean `globalAlpha`, `compositeOperation`, `shadowBlur`, `filter` antes de copiar |
 
