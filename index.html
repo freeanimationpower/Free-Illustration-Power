@@ -301,21 +301,24 @@ body {
   display: flex; flex-direction: column; gap: 4px;
 }
 .layers-footer .l-btn-row {
-  display: flex; gap: 2px;
+  display: flex; gap: 3px;
 }
 .layers-footer button {
-  flex: 1; height: 26px; border-radius: 4px; border: 1px solid var(--border);
+  flex: 1; min-width: 0;
+  height: 26px; border-radius: 5px; border: 1px solid var(--border);
   background: var(--bg-tertiary); color: var(--text-primary); cursor: pointer;
   font-size: 10px; display: flex; align-items: center; justify-content: center; gap: 3px;
-  transition: background 0.12s;
+  transition: background 0.12s; padding: 0 4px;
 }
 .layers-footer button:hover { background: rgba(255,255,255,0.06); }
 .layers-footer button:active { transform: scale(0.95); }
 .layers-footer button.danger { color: var(--red); }
 .layers-footer button.danger:hover { border-color: var(--red); background: rgba(229,57,53,0.1); }
 .layers-footer .l-opacity-row {
-  display: flex; align-items: center; gap: 4px; font-size: 10px; color: var(--text-secondary);
+  display: flex; flex-wrap: wrap; align-items: center; gap: 3px 6px; font-size: 10px; color: var(--text-secondary);
 }
+.layers-footer .l-opacity-row .l-opacity-label { flex: 1 1 100%; font-weight: 500; }
+.layers-footer .l-opacity-row .l-opacity-val { font-size: 10px; min-width: 32px; text-align: right; }
 .layers-footer .l-opacity-row input[type="range"] {
   flex: 1; -webkit-appearance: none; appearance: none;
   height: 4px; border-radius: 2px; background: var(--border); outline: none; cursor: pointer;
@@ -409,6 +412,7 @@ body {
     <div class="tool-sep"></div>
     <button class="btn" id="shortcutsBtn" title="Keyboard Shortcuts" style="font-size:14px;font-weight:700;color:var(--accent-light)">?</button>
     <input type="file" id="openFileInput" accept=".fapd,application/json" style="display:none">
+    <input type="file" id="importImageInput" accept="image/png,image/jpeg,image/webp" style="display:none">
     <div class="shortcuts-dropdown" id="shortcutsDropdown">
       <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;padding-bottom:8px;border-bottom:1px solid var(--border)">
         <img src="icons/logo.png" alt="FAP" style="width:28px;height:28px;border-radius:4px">
@@ -424,6 +428,7 @@ body {
       </div>
       <div class="sc-group"><div class="sc-title">Capas</div>
         <div class="sc-row"><span class="sc-key">Ctrl+N</span><span class="sc-desc">Nueva Capa</span></div>
+        <div class="sc-row"><span class="sc-key">Ctrl+I</span><span class="sc-desc">Importar Imagen</span></div>
         <div class="sc-row"><span class="sc-key">Ctrl+J</span><span class="sc-desc">Duplicar Capa</span></div>
         <div class="sc-row"><span class="sc-key">Ctrl+Del</span><span class="sc-desc">Eliminar Capa</span></div>
         <div class="sc-row"><span class="sc-key">Ctrl+Up/Down</span><span class="sc-desc">Mover Capa Arriba/Abajo</span></div>
@@ -479,25 +484,32 @@ body {
       <div class="layers-scroll" id="layersScroll"></div>
       <div class="layers-footer">
         <div class="l-opacity-row">
-          <span>Op.</span>
-          <input type="range" id="layerOpacitySlider" min="0" max="100" value="100" step="1">
+          <span class="l-opacity-label">Opacidad</span>
           <span class="l-opacity-val" id="layerOpacityVal">100%</span>
+          <input type="range" id="layerOpacitySlider" min="0" max="100" value="100" step="1">
         </div>
         <div class="l-btn-row">
           <button data-action="layerNew" title="Nueva Capa (Ctrl+N)">
             <svg viewBox="0 0 24 24" width="12" height="12"><line x1="12" y1="5" x2="12" y2="19" stroke="currentColor" stroke-width="2"/><line x1="5" y1="12" x2="19" y2="12" stroke="currentColor" stroke-width="2"/></svg> Nueva
           </button>
+          <button data-action="layerImport" title="Importar Imagen (Ctrl+I)">
+            <svg viewBox="0 0 24 24" width="12" height="12"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4" fill="none" stroke="currentColor" stroke-width="2"/><polyline points="17,8 12,3 7,8" fill="none" stroke="currentColor" stroke-width="2"/><line x1="12" y1="3" x2="12" y2="15" stroke="currentColor" stroke-width="2"/></svg> Imagen
+          </button>
+        </div>
+        <div class="l-btn-row">
           <button data-action="layerDup" title="Duplicar Capa (Ctrl+J)">
-            <svg viewBox="0 0 24 24" width="12" height="12"><rect x="8" y="6" width="12" height="12" rx="1" fill="none" stroke="currentColor" stroke-width="1.5"/><rect x="5" y="3" width="12" height="12" rx="1" fill="none" stroke="currentColor" stroke-width="1.5"/></svg> Dup
-          </button>
-          <button data-action="layerUp" title="Subir Capa (Ctrl+Up)">
-            <svg viewBox="0 0 24 24" width="12" height="12"><polyline points="6,15 12,9 18,15" fill="none" stroke="currentColor" stroke-width="2"/></svg>
-          </button>
-          <button data-action="layerDown" title="Bajar Capa (Ctrl+Down)">
-            <svg viewBox="0 0 24 24" width="12" height="12"><polyline points="6,9 12,15 18,9" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+            <svg viewBox="0 0 24 24" width="12" height="12"><rect x="8" y="6" width="12" height="12" rx="1" fill="none" stroke="currentColor" stroke-width="1.5"/><rect x="5" y="3" width="12" height="12" rx="1" fill="none" stroke="currentColor" stroke-width="1.5"/></svg> Duplicar
           </button>
           <button data-action="layerDel" class="danger" title="Eliminar Capa (Ctrl+Del)">
-            <svg viewBox="0 0 24 24" width="12" height="12"><line x1="5" y1="7" x2="19" y2="7" stroke="currentColor" stroke-width="1.5"/><rect x="7" y="5" width="10" height="1" fill="none" stroke="currentColor" stroke-width="1"/><rect x="8" y="8" width="8" height="12" rx="1" fill="none" stroke="currentColor" stroke-width="1.5"/></svg> Del
+            <svg viewBox="0 0 24 24" width="12" height="12"><line x1="5" y1="7" x2="19" y2="7" stroke="currentColor" stroke-width="1.5"/></svg> Eliminar
+          </button>
+        </div>
+        <div class="l-btn-row">
+          <button data-action="layerUp" title="Subir Capa (Ctrl+Up)">
+            <svg viewBox="0 0 24 24" width="14" height="14"><polyline points="6,15 12,9 18,15" fill="none" stroke="currentColor" stroke-width="2"/></svg> Subir
+          </button>
+          <button data-action="layerDown" title="Bajar Capa (Ctrl+Down)">
+            <svg viewBox="0 0 24 24" width="14" height="14"><polyline points="6,9 12,15 18,9" fill="none" stroke="currentColor" stroke-width="2"/></svg> Bajar
           </button>
         </div>
       </div>
@@ -555,6 +567,22 @@ function createLayerCanvas(w, h) {
   var c = document.createElement('canvas');
   c.width = w; c.height = h;
   return c;
+}
+
+function importImageToLayer(file) {
+  var img = new Image();
+  img.onload = function() {
+    var cw = img.width, ch = img.height;
+    var scale = Math.min(CANVAS_W / cw, CANVAS_H / ch, 1);
+    var nw = Math.round(cw * scale), nh = Math.round(ch * scale);
+    var l = newLayer(file.name.split('.')[0] || 'Imagen');
+    var lc = l.canvas.getContext('2d');
+    lc.drawImage(img, (CANVAS_W - nw) / 2, (CANVAS_H - nh) / 2, nw, nh);
+    layers.splice(activeLayerIndex + 1, 0, l);
+    activeLayerIndex = Math.min(activeLayerIndex + 1, layers.length - 1);
+    renderLayerPanel(); selectLayer(activeLayerIndex);
+  };
+  img.src = URL.createObjectURL(file);
 }
 
 function newLayer(name, w, h) {
@@ -1685,6 +1713,7 @@ document.querySelector('.layers-footer').addEventListener('click', function(e) {
     case 'layerUp': moveLayerUp(activeLayerIndex); break;
     case 'layerDown': moveLayerDown(activeLayerIndex); break;
     case 'layerDel': removeLayer(activeLayerIndex); break;
+    case 'layerImport': document.getElementById('importImageInput').click(); break;
   }
 });
 
@@ -1769,6 +1798,7 @@ document.addEventListener('keydown', function(e) {
   if (ctrl&&shift&&e.key.toLowerCase()==='e') { e.preventDefault();exportEPS();return; }
   if (ctrl&&!shift&&e.key.toLowerCase()==='n') { e.preventDefault();addLayer();return; }
   if (ctrl&&!shift&&e.key.toLowerCase()==='j') { e.preventDefault();duplicateLayer(activeLayerIndex);return; }
+  if (ctrl&&!shift&&e.key.toLowerCase()==='i') { e.preventDefault();document.getElementById('importImageInput').click();return; }
   if (ctrl&&!shift&&e.key==='Delete') { e.preventDefault();removeLayer(activeLayerIndex);return; }
   if (ctrl&&!shift&&e.key==='ArrowUp') { e.preventDefault();moveLayerUp(activeLayerIndex);return; }
   if (ctrl&&!shift&&e.key==='ArrowDown') { e.preventDefault();moveLayerDown(activeLayerIndex);return; }
@@ -1878,6 +1908,7 @@ function loadProjectFile(file) {
 }
 
 document.getElementById('openFileInput').addEventListener('change', function(e){ if(e.target.files[0]){loadProjectFile(e.target.files[0]);} e.target.value=''; });
+document.getElementById('importImageInput').addEventListener('change', function(e){ if(e.target.files[0]){importImageToLayer(e.target.files[0]);} e.target.value=''; });
 document.addEventListener('dragover', function(e){e.preventDefault();});
 document.addEventListener('drop', function(e){ e.preventDefault(); var f=e.dataTransfer.files[0]; if(f&&(f.name.endsWith('.fapd')||f.name.endsWith('.json'))) loadProjectFile(f); });
 drawCanvas.addEventListener('contextmenu', function(e){e.preventDefault();});

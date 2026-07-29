@@ -468,4 +468,74 @@ D:\FAP WEB\programa de dibujo\
 
 - **Autor**: Eduardo Fierro Duque, Santiago de Chile
 - **Basado en**: FAP — Free Animation Power ([freeanimationpower.org](https://freeanimationpower.org))
+- **Repositorio**: [github.com/freeanimationpower/Free-Illustration-Power](https://github.com/freeanimationpower/Free-Illustration-Power)
 - **Año**: 2026
+
+---
+
+## 9. Changelog de Mejoras (Julio 2026)
+
+### 9.1 Correcciones de Pinceles
+
+| Bug | Descripcion | Solucion |
+|---|---|---|
+| Caligrafia rota | `drawOriginalBrush` no renderizaba elipses rotadas | Handler `br.slant` con elipses rotadas interpoladas |
+| Brillo (Glow) roto | Perdia el doble trazo (nucleo brillante interior) | Handler `br.doubleStroke` con outer glow + inner bright core |
+| Efectos Ac. invisibles | w28/w29/w30 usaban alpha extremadamente bajo (1-5%) | Ajuste de alpha base: 0.12→0.25, 0.10→0.22, 0.04→0.18 |
+| Pinceles con dispersion | `Math.random()` diferente entre ctx y lbCtx → particulas saltaban al soltar | PRNG deterministico Mulberry32 con `withSameSeed()` |
+| Punto inicial gigante | `startDraw` no escalaba por presion como `moveDraw` | `dotSize = lw * (0.2+pressure*0.8) * (pp.size||1)` |
+
+### 9.2 Capas Transparentes y Borrador Real
+
+| Cambio | Descripcion |
+|---|---|
+| Capas transparentes | `createLayerCanvas()` ya no rellena con blanco. Solo la capa "Fondo" inicial es blanca |
+| Borrador transparente | Usa `globalCompositeOperation = 'destination-out'` en vez de pintar blanco |
+| Canvas state limpio | `syncLayerBuffer()` y `flushLayerBuffer()` resetean `globalAlpha`, `compositeOperation`, `shadowBlur`, `filter` antes de copiar |
+
+### 9.3 UI y Experiencia de Usuario
+
+| Cambio | Descripcion |
+|---|---|
+| Iconos de pinceles | 34 iconos nuevos para acuarela y oleo. Fallback a texto si no hay PNG |
+| Categorias con fondo | Bloques de pinceles con fondos alternados (`bg-tertiary`/`bg-secondary`) |
+| Scrollbars ampliados | Brush strip, color strip y layers panel: 5-6px → 14px para tablet |
+| Tiras mas espaciosas | Altura 30→44px, colores 22→28px, gaps ampliados |
+| Botones de capa | Rediseno en 4 bloques: Opacidad, Nueva+Imagen, Duplicar+Eliminar, Subir+Bajar |
+| Nombres completos | Botones con nombres legibles (Duplicar, Eliminar, Subir, Bajar, Imagen) |
+
+### 9.4 Importacion y Exportacion
+
+| Funcionalidad | Descripcion |
+|---|---|
+| Importar Imagen | Boton "Imagen" + `Ctrl+I`. PNG/JPG/WebP como nueva capa, escalada y centrada |
+| Export PNG | `Ctrl+Shift+P` |
+| Export JPG | `Ctrl+Shift+J` (calidad 92%) |
+| Export EPS | `Ctrl+Shift+E` (PostScript nivel 2 con JPEG embebido via DCTDecode) |
+| Formato `.fapd` | Guarda/Abre proyecto editable con todas las capas y opacidad |
+| Archivos export | `FIP_01.png`, `FIP_02.jpg`, `FIP_03.eps` |
+
+### 9.5 Sistema de Debug
+
+| Componente | Descripcion |
+|---|---|
+| Panel DEBUG | `Ctrl+Shift+D` activa panel flotante + logs en consola |
+| Trazado de pinceles | Muestra ruta de renderizado (water/oil → original → default) |
+| Verificacion de canvas | Detecta `globalAlpha`/`compositeOperation`/`shadowBlur` sucios |
+| Actualizacion optimizada | Solo 1 DOM update por trazo (al final), no por segmento |
+
+### 9.6 Herramienta Mover (eliminada)
+
+Se implemento y elimino una herramienta de desplazamiento de objetos (tecla V) con:
+- Seleccion por rectangulo (marquee)
+- Varita magica (flood-fill BFS)
+- Escaneo lineal de capa completa
+
+Se elimino por complejizar el sistema y causar inestabilidad. Se retomara en version futura.
+
+### 9.7 Renombrado
+
+| Antes | Ahora |
+|---|---|
+| FAP Draw | **Free Illustration Power** |
+| `FAP_DRAW_01.png` | `FIP_01.png` |
