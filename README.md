@@ -1,5 +1,8 @@
 # Free Illustration Power — Programa de Ilustracion Digital por Capas
 
+<img width="2172" height="724" alt="free vector images 1 linea" src="https://github.com/user-attachments/assets/6ffb24c5-5a43-4c3a-a06a-b6ac7051f0c0" />
+
+
 ## 1. Presentación del Proyecto
 
 **FAP Draw** es una aplicación web de ilustración digital que funciona completamente en el navegador, sin dependencias externas, sin instalación, y sin backend. Es una evolución directa de **FAP (Free Animation Power)**, adaptando su motor de dibujo de 60 pinceles y su arquitectura vanilla JS hacia un flujo de trabajo de ilustración por capas, similar a Photoshop, Krita o Procreate.
