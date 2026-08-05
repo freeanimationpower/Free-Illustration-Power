@@ -469,6 +469,12 @@ D:\FAP WEB\programa de dibujo\
 
 ---
 
+## Documentacion Tecnica
+
+- [Informe Tecnico Free Illustration Power](informes_pdf/08_Free_Illustration_Power.pdf) — Documento completo de arquitectura, sistema de capas, motor de 94 pinceles, sensibilidad multi-parametro y especificaciones tecnicas.
+
+---
+
 ## 8. Créditos
 
 - **Autor**: Eduardo Fierro Duque, Santiago de Chile
