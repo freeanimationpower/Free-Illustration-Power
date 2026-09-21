@@ -1,4 +1,22 @@
 # Free Illustration Power — Programa de Ilustracion Digital por Capas
+<p align="center">
+  <a href="https://freeanimationpower.org"><img src="https://img.shields.io/badge/Web_Hub-freeanimationpower.org-ffdc00?style=for-the-badge" alt="Web Hub"></a>
+  <a href="https://www.youtube.com/@freeanimationpower"><img src="https://img.shields.io/badge/YouTube-@freeanimationpower-FF0000?style=for-the-badge&logo=youtube&logoColor=white" alt="YouTube"></a>
+  <a href="https://github.com/freeanimationpower"><img src="https://img.shields.io/badge/GitHub-freeanimationpower-181717?style=for-the-badge&logo=github&logoColor=white" alt="GitHub"></a>
+</p>
+
+<p align="center">
+  <img src="docs/screenshot.png" alt="Free Illustration Power — editor de ilustración con capas y pinceles" width="860">
+</p>
+
+## 🎬 Videos
+
+📺 Canal oficial: [@freeanimationpower](https://www.youtube.com/@freeanimationpower)
+
+| Vídeo | Título |
+|---|---|
+| <a href="https://youtu.be/CRYT6bSBpRY"><img src="https://i.ytimg.com/vi/CRYT6bSBpRY/hqdefault.jpg" width="240"></a> | [Ejercicio simple con capas y pinceles — demo rápida](https://youtu.be/CRYT6bSBpRY) |
+| <a href="https://youtu.be/6DBU8wrP9mU"><img src="https://i.ytimg.com/vi/6DBU8wrP9mU/hqdefault.jpg" width="240"></a> | [Crea dos personajes: capas y pinceles paso a paso](https://youtu.be/6DBU8wrP9mU) |
 
 > **Accede directamente**: [freeanimationpower.org/tools/illustration/](https://freeanimationpower.org/tools/illustration/) — Ilustra con 94 pinceles sin instalar nada.
 
@@ -7,17 +25,17 @@
 
 ## 1. Presentación del Proyecto
 
-**FAP Draw** es una aplicación web de ilustración digital que funciona completamente en el navegador, sin dependencias externas, sin instalación, y sin backend. Es una evolución directa de **FAP (Free Animation Power)**, adaptando su motor de dibujo de 60 pinceles y su arquitectura vanilla JS hacia un flujo de trabajo de ilustración por capas, similar a Photoshop, Krita o Procreate.
+**Free Animation Power Draw** es una aplicación web de ilustración digital que funciona completamente en el navegador, sin dependencias externas, sin instalación, y sin backend. Es una evolución directa de **Free Animation Power (Free Animation Power)**, adaptando su motor de dibujo de 60 pinceles y su arquitectura vanilla JS hacia un flujo de trabajo de ilustración por capas, similar a Photoshop, Krita o Procreate.
 
 ### Motivación
 
-FAP original (`VERSION WEB PC` y `VERSION WEB MOVIL`) es un programa de animación cuadro por cuadro. Funciona con un timeline horizontal donde cada frame es un lienzo independiente. Para ilustración estática, este modelo es limitado: necesitas trabajar con **capas** (layers) que se apilan verticalmente, cada una con su propio contenido, opacidad, visibilidad y bloqueo independientes.
+Free Animation Power original (`VERSION WEB PC` y `VERSION WEB MOVIL`) es un programa de animación cuadro por cuadro. Funciona con un timeline horizontal donde cada frame es un lienzo independiente. Para ilustración estática, este modelo es limitado: necesitas trabajar con **capas** (layers) que se apilan verticalmente, cada una con su propio contenido, opacidad, visibilidad y bloqueo independientes.
 
-**FAP Draw** reemplaza el timeline de animación por un **panel de capas** tipo Photoshop, manteniendo todo el poder del motor de pinceles original (ahora ampliado a 94 pinceles).
+**Free Animation Power Draw** reemplaza el timeline de animación por un **panel de capas** tipo Photoshop, manteniendo todo el poder del motor de pinceles original (ahora ampliado a 94 pinceles).
 
 ### Idea central
 
-> "La misma libertad de FAP para dibujar, pero con la organización y control de un sistema de capas profesional."
+> "La misma libertad de Free Animation Power para dibujar, pero con la organización y control de un sistema de capas profesional."
 
 ---
 
@@ -25,18 +43,18 @@ FAP original (`VERSION WEB PC` y `VERSION WEB MOVIL`) es un programa de animaci�
 
 El proyecto se basa directamente en:
 
-- **FAP Desktop (VERSION WEB PC)** — `D:\FAP WEB\VERSION WEB PC\index.html`
+- **Free Animation Power Desktop (VERSION WEB PC)** — `D:\Free Animation Power WEB\VERSION WEB PC\index.html`
   - Aplicación single-file vanilla JS para animación frame-by-frame
   - Canvas 1920x1080, 60 pinceles, pointer events con presión de stylus
   - Export GIF/Video, Save/Load `.fap`
   - Repositorio GitHub: [github.com/freeanimationpower](https://github.com/freeanimationpower)
   - Sitio web: [freeanimationpower.org](https://freeanimationpower.org)
 
-- **FAP Mobile (VERSION WEB MOVIL)** — `D:\FAP WEB\VERSION WEB MOVIL\index.html`
+- **Free Animation Power Mobile (VERSION WEB MOVIL)** — `D:\Free Animation Power WEB\VERSION WEB MOVIL\index.html`
   - Versión adaptada para pantallas táctiles móviles
   - Mismo motor de pinceles, interfaz optimizada para móvil
 
-**FAP Draw** nace como un fork conceptual de FAP Desktop, reemplazando el sistema de frames/timeline por un sistema de capas, y expandiendo el set de pinceles de 60 a 94.
+**Free Animation Power Draw** nace como un fork conceptual de Free Animation Power Desktop, reemplazando el sistema de frames/timeline por un sistema de capas, y expandiendo el set de pinceles de 60 a 94.
 
 ---
 
@@ -58,7 +76,7 @@ El proyecto se basa directamente en:
 
 1. **Portabilidad máxima**: funciona en cualquier navegador moderno sin servidor
 2. **Sin configuración**: no requiere Node.js, Webpack, Vite ni nada similar
-3. **Legado de FAP**: FAP original ya usaba esta arquitectura, lo que permite reutilizar el 100% del motor de pinceles
+3. **Legado de Free Animation Power**: Free Animation Power original ya usaba esta arquitectura, lo que permite reutilizar el 100% del motor de pinceles
 4. **Offline-first**: toda la lógica es local, no hay llamadas a servidores
 5. **Distribución trivial**: un solo archivo que pesa menos de 100 KB sin comprimir
 
@@ -168,7 +186,7 @@ El buffer intermedio (`layerBuffer`) permite:
 
 #### ¿Por qué 94 pinceles y no solo los 30 de acuarela?
 
-Los 60 pinceles originales de FAP representan técnicas de dibujo tradicional (lápiz, tiza, carboncillo, marcador, tinta) y efectos especiales (neón, graffiti, telaraña, fuego, etc.). Eliminarlos habría reducido la versatilidad del programa. En lugar de eso, se **sumaron** 34 pinceles nuevos especializados en acuarela y óleo sobre los 60 existentes.
+Los 60 pinceles originales de Free Animation Power representan técnicas de dibujo tradicional (lápiz, tiza, carboncillo, marcador, tinta) y efectos especiales (neón, graffiti, telaraña, fuego, etc.). Eliminarlos habría reducido la versatilidad del programa. En lugar de eso, se **sumaron** 34 pinceles nuevos especializados en acuarela y óleo sobre los 60 existentes.
 
 #### Anatomía de un pincel
 
@@ -191,7 +209,7 @@ Cada pincel se define con:
 renderBrushSegment(ctx, brush, color, alpha, lineWidth, x, y, dx, dy, dist, pressureParams):
   ├── ¿Tiene flag de acuarela/óleo nuevos?
   │   └── Sí → renderizado especializado (30+30 bloques únicos)
-  ├── ¿Tiene flag de pincel FAP original?
+  ├── ¿Tiene flag de pincel Free Animation Power original?
   │   └── Sí → drawOriginalBrush() (50+ bloques de renderizado)
   └── No → stroke simple (lineTo entre puntos)
 ```
@@ -408,16 +426,16 @@ Cada capa se serializa como PNG base64. Ventajas:
 
 ### Bug #3: Pinceles originales desaparecidos
 
-**Causa**: En la primera implementación solo se incluyeron 9 pinceles "clásicos" + 30 acuarela + 4 óleo = 43. Los 51 pinceles restantes del FAP original no se portaron.
+**Causa**: En la primera implementación solo se incluyeron 9 pinceles "clásicos" + 30 acuarela + 4 óleo = 43. Los 51 pinceles restantes del Free Animation Power original no se portaron.
 
-**Solución**: Se agregaron las definiciones de los 51 pinceles faltantes al objeto `BRUSHES`, y se implementó la función `drawOriginalBrush()` que contiene el renderizado completo de todos los pinceles FAP originales (jitter, splat, water, charcoal, crayon, dots, hatch, neon, fur, drip, airbrush, sand, sponge, pastel, gravel, rake, chain, zigzag, wave, lace, oil, dryBrush, smudge, acrylic, gouache, sparkle, comet, graffiti, spiderweb, smoke, confetti, rain, bubbles, vines, scales, stitch, grid, embers, crackle, diamond, feather, wire, pebble, brick, scribble, drizzle, tribal, frost, marble, holographic).
+**Solución**: Se agregaron las definiciones de los 51 pinceles faltantes al objeto `BRUSHES`, y se implementó la función `drawOriginalBrush()` que contiene el renderizado completo de todos los pinceles Free Animation Power originales (jitter, splat, water, charcoal, crayon, dots, hatch, neon, fur, drip, airbrush, sand, sponge, pastel, gravel, rake, chain, zigzag, wave, lace, oil, dryBrush, smudge, acrylic, gouache, sparkle, comet, graffiti, spiderweb, smoke, confetti, rain, bubbles, vines, scales, stitch, grid, embers, crackle, diamond, feather, wire, pebble, brick, scribble, drizzle, tribal, frost, marble, holographic).
 
 ---
 
 ## 5. Estructura del Proyecto
 
 ```
-D:\FAP WEB\programa de dibujo\
+D:\Free Animation Power WEB\programa de dibujo\
 ├── index.html          (1761 líneas, single-file app)
 ├── README.md           (este archivo)
 └── icons\              (118 archivos de íconos)
@@ -478,7 +496,7 @@ D:\FAP WEB\programa de dibujo\
 ## 8. Créditos
 
 - **Autor**: Eduardo Fierro Duque, Santiago de Chile
-- **Basado en**: FAP — Free Animation Power ([freeanimationpower.org](https://freeanimationpower.org))
+- **Basado en**: Free Animation Power — Free Animation Power ([freeanimationpower.org](https://freeanimationpower.org))
 - **Repositorio**: [github.com/freeanimationpower/Free-Illustration-Power](https://github.com/freeanimationpower/Free-Illustration-Power)
 - **Año**: 2026
 
@@ -549,5 +567,5 @@ Se elimino por complejizar el sistema y causar inestabilidad. Se retomara en ver
 
 | Antes | Ahora |
 |---|---|
-| FAP Draw | **Free Illustration Power** |
+| Free Animation Power Draw | **Free Illustration Power** |
 | `FAP_DRAW_01.png` | `FIP_01.png` |
