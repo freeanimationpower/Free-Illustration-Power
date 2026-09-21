@@ -64,32 +64,31 @@ El proyecto se basa directamente en:
 
 ```mermaid
 flowchart LR
-%%{init: {'theme': 'base', 'themeVariables': {'primaryColor': '#ffdc00', 'primaryBorderColor': '#1a1a1a', 'primaryTextColor': '#1a1a1a', 'lineColor': '#ff4200', 'fontFamily': 'Segoe UI'}}}%%
     classDef ui fill:#ffdc00,stroke:#1a1a1a,color:#1a1a1a,stroke-width:2px;
     classDef engine fill:#ff4200,stroke:#1a1a1a,color:#ffffff,stroke-width:2px;
     classDef data fill:#1a1a1a,stroke:#ff4200,color:#ffffff,stroke-width:2px;
-    classDef ext fill:#ffffff,stroke:#1a1a1a,color:#1a1a1a,stroke-width:2px,stroke-dasharray:6 3;
-        subgraph INPUT["🖱️ Entrada multi-parámetro"]
+    classDef ext fill:#ffffff,stroke:#1a1a1a,color:#1a1a1a,stroke-width:2px;
+        subgraph INPUT["Entrada multi-parametro"]
             direction TB
-            PEN["Lápiz · mouse · tacto"]
-            SEN["Sensibilidad:<br/>presión · velocidad · inclinación"]
+            PEN["Lapiz · mouse · tacto"]
+            SEN["Sensibilidad:<br/>presion · velocidad · inclinacion"]
         end
-        subgraph BRUSH["🖌️ Motor de pinceles — 94 presets"]
+        subgraph BRUSH["Motor de pinceles — 94 presets"]
             direction TB
-            B1["Clásicos · formas · texturas"]
-            B2["Dinámicos:<br/>parámetros modulados por sensibilidad"]
+            B1["Clasicos · formas · texturas"]
+            B2["Dinamicos:<br/>parametros modulados por sensibilidad"]
         end
-        subgraph LAYERS["🗂️ Sistema de capas"]
+        subgraph LAYERS["Sistema de capas"]
             direction TB
             L1["Capas independientes<br/>visibilidad · opacidad · merge"]
             L2["Undo / Redo por capa"]
         end
-        subgraph VIEW["🔭 Vista"]
+        subgraph VIEW["Vista"]
             direction TB
             ZP["Zoom + Pan fluido"]
             DSP["Canvas principal"]
         end
-        subgraph FILE["💾 Archivo propio + exportación"]
+        subgraph FILE["Archivo propio + exportacion"]
             direction TB
             F1["Guardar / cargar proyecto"]
             F2["PNG · JPG export"]
