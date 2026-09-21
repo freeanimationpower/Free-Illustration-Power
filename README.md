@@ -62,6 +62,46 @@ El proyecto se basa directamente en:
 
 ### 3.1 Arquitectura General
 
+```mermaid
+flowchart LR
+%%{init: {'theme': 'base', 'themeVariables': {'primaryColor': '#ffdc00', 'primaryBorderColor': '#1a1a1a', 'primaryTextColor': '#1a1a1a', 'lineColor': '#ff4200', 'fontFamily': 'Segoe UI'}}}%%
+    classDef ui fill:#ffdc00,stroke:#1a1a1a,color:#1a1a1a,stroke-width:2px;
+    classDef engine fill:#ff4200,stroke:#1a1a1a,color:#ffffff,stroke-width:2px;
+    classDef data fill:#1a1a1a,stroke:#ff4200,color:#ffffff,stroke-width:2px;
+    classDef ext fill:#ffffff,stroke:#1a1a1a,color:#1a1a1a,stroke-width:2px,stroke-dasharray:6 3;
+        subgraph INPUT["🖱️ Entrada multi-parámetro"]
+            direction TB
+            PEN["Lápiz · mouse · tacto"]
+            SEN["Sensibilidad:<br/>presión · velocidad · inclinación"]
+        end
+        subgraph BRUSH["🖌️ Motor de pinceles — 94 presets"]
+            direction TB
+            B1["Clásicos · formas · texturas"]
+            B2["Dinámicos:<br/>parámetros modulados por sensibilidad"]
+        end
+        subgraph LAYERS["🗂️ Sistema de capas"]
+            direction TB
+            L1["Capas independientes<br/>visibilidad · opacidad · merge"]
+            L2["Undo / Redo por capa"]
+        end
+        subgraph VIEW["🔭 Vista"]
+            direction TB
+            ZP["Zoom + Pan fluido"]
+            DSP["Canvas principal"]
+        end
+        subgraph FILE["💾 Archivo propio + exportación"]
+            direction TB
+            F1["Guardar / cargar proyecto"]
+            F2["PNG · JPG export"]
+        end
+        INPUT --> BRUSH --> LAYERS --> VIEW --> FILE
+        class PEN,SEN ui
+        class B1,B2 engine
+        class L1,L2 data
+        class ZP,DSP ui
+        class F1,F2 ext
+```
+
 | Característica | Implementación |
 |---|---|
 | **Lenguaje** | JavaScript ES6+ vanilla (sin TypeScript, sin transpilador) |
