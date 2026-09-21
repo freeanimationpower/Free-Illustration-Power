@@ -1,4 +1,4 @@
-# Free Illustration Power — Programa de Ilustracion Digital por Capas
+# Free Illustration Power — Programa de Ilustración Digital por Capas
 <p align="center">
   <a href="https://freeanimationpower.org"><img src="https://img.shields.io/badge/Web_Hub-freeanimationpower.org-ffdc00?style=for-the-badge" alt="Web Hub"></a>
   <a href="https://www.youtube.com/@freeanimationpower"><img src="https://img.shields.io/badge/YouTube-@freeanimationpower-FF0000?style=for-the-badge&logo=youtube&logoColor=white" alt="YouTube"></a>
@@ -9,7 +9,7 @@
   <img src="docs/screenshot.png" alt="Free Illustration Power — editor de ilustración con capas y pinceles" width="860">
 </p>
 
-## 🎬 Videos
+## 🎬 Vídeos
 
 📺 Canal oficial: [@freeanimationpower](https://www.youtube.com/@freeanimationpower)
 
@@ -43,14 +43,14 @@ Free Animation Power original (`VERSION WEB PC` y `VERSION WEB MOVIL`) es un pro
 
 El proyecto se basa directamente en:
 
-- **Free Animation Power Desktop (VERSION WEB PC)** — `D:\Free Animation Power WEB\VERSION WEB PC\index.html`
+- **Free Animation Power Desktop (VERSIÓN WEB PC)** — `D:\Free Animation Power WEB\VERSION WEB PC\index.html`
   - Aplicación single-file vanilla JS para animación frame-by-frame
   - Canvas 1920x1080, 60 pinceles, pointer events con presión de stylus
-  - Export GIF/Video, Save/Load `.fap`
+  - Export GIF/Vídeo, Save/Load `.fap`
   - Repositorio GitHub: [github.com/freeanimationpower](https://github.com/freeanimationpower)
   - Sitio web: [freeanimationpower.org](https://freeanimationpower.org)
 
-- **Free Animation Power Mobile (VERSION WEB MOVIL)** — `D:\Free Animation Power WEB\VERSION WEB MOVIL\index.html`
+- **Free Animation Power Mobile (VERSIÓN WEB MOVIL)** — `D:\Free Animation Power WEB\VERSION WEB MOVIL\index.html`
   - Versión adaptada para pantallas táctiles móviles
   - Mismo motor de pinceles, interfaz optimizada para móvil
 
@@ -68,15 +68,15 @@ flowchart LR
     classDef engine fill:#ff4200,stroke:#1a1a1a,color:#ffffff,stroke-width:2px;
     classDef data fill:#1a1a1a,stroke:#ff4200,color:#ffffff,stroke-width:2px;
     classDef ext fill:#ffffff,stroke:#1a1a1a,color:#1a1a1a,stroke-width:2px;
-        subgraph INPUT["Entrada multi-parametro"]
+        subgraph INPUT["Entrada multi-parámetro"]
             direction TB
             PEN["Lapiz · mouse · tacto"]
-            SEN["Sensibilidad:<br/>presion · velocidad · inclinacion"]
+            SEN["Sensibilidad:<br/>presión · velocidad · inclinación"]
         end
         subgraph BRUSH["Motor de pinceles — 94 presets"]
             direction TB
-            B1["Clasicos · formas · texturas"]
-            B2["Dinamicos:<br/>parametros modulados por sensibilidad"]
+            B1["Clásicos · formas · texturas"]
+            B2["Dinámicos:<br/>parámetros modulados por sensibilidad"]
         end
         subgraph LAYERS["Sistema de capas"]
             direction TB
@@ -88,7 +88,7 @@ flowchart LR
             ZP["Zoom + Pan fluido"]
             DSP["Canvas principal"]
         end
-        subgraph FILE["Archivo propio + exportacion"]
+        subgraph FILE["Archivo propio + exportación"]
             direction TB
             F1["Guardar / cargar proyecto"]
             F2["PNG · JPG export"]
@@ -208,7 +208,7 @@ El buffer intermedio (`layerBuffer`) permite:
 
 | # | Categoría | Cantidad | Descripción |
 |---|---|---|---|
-| 1 | **Clásicos** | 20 | round, square, pencil, soft, calligraphy, marker, ink, chalk, glow, pixel, splatter, watercolor, charcoal, crayon, hardEraser, dots, hatch, neon, fur, drip |
+| 1 | **Clásicos** | 20 | round, square, pencil, soft, calligraphy, marker, ink, chalk, glow, píxel, splatter, watercolor, charcoal, crayon, hardEraser, dots, hatch, neon, fur, drip |
 | 2 | **Texturas** | 20 | airbrush, sand, sponge, pastel, gravel, rake, chain, zigzag, wave, lace, oil, dryBrush, smudge, acrylic, gouache, sparkle, comet, graffiti, spiderweb, smoke |
 | 3 | **Efectos** | 20 | confetti, rain, bubbles, vines, scales, stitch, grid, embers, crackle, diamond, feather, wire, pebble, brick, scribble, drizzle, tribal, frost, marble, holographic |
 | 4 | **Acuarela Húmeda** | 5 | Aguada húmeda redonda, plana, floración, detalle, mezcla |
@@ -526,9 +526,9 @@ D:\Free Animation Power WEB\programa de dibujo\
 
 ---
 
-## Documentacion Tecnica
+## Documentacion Técnica
 
-- [Informe Tecnico Free Illustration Power](informes_pdf/08_Free_Illustration_Power.pdf) — Documento completo de arquitectura, sistema de capas, motor de 94 pinceles, sensibilidad multi-parametro y especificaciones tecnicas.
+- [Informe Técnico Free Illustration Power](informes_pdf/08_Free_Illustration_Power.pdf) — Documento completo de arquitectura, sistema de capas, motor de 94 pinceles, sensibilidad multi-parámetro y especificaciones técnicas.
 
 ---
 
@@ -545,17 +545,17 @@ D:\Free Animation Power WEB\programa de dibujo\
 
 ### 9.1 Correcciones de Pinceles
 
-| Bug | Descripcion | Solucion |
+| Bug | Descripción | Solucion |
 |---|---|---|
 | Caligrafia rota | `drawOriginalBrush` no renderizaba elipses rotadas | Handler `br.slant` con elipses rotadas interpoladas |
 | Brillo (Glow) roto | Perdia el doble trazo (nucleo brillante interior) | Handler `br.doubleStroke` con outer glow + inner bright core |
 | Efectos Ac. invisibles | w28/w29/w30 usaban alpha extremadamente bajo (1-5%) | Ajuste de alpha base: 0.12→0.25, 0.10→0.22, 0.04→0.18 |
-| Pinceles con dispersion | `Math.random()` diferente entre ctx y lbCtx → particulas saltaban al soltar | PRNG deterministico Mulberry32 con `withSameSeed()` |
-| Punto inicial gigante | `startDraw` no escalaba por presion como `moveDraw` | `dotSize = lw * (0.2+pressure*0.8) * (pp.size||1)` |
+| Pinceles con dispersion | `Math.random()` diferente entre ctx y lbCtx → particulas saltaban al soltar | PRNG determinístico Mulberry32 con `withSameSeed()` |
+| Punto inicial gigante | `startDraw` no escalaba por presión como `moveDraw` | `dotSize = lw * (0.2+pressure*0.8) * (pp.size||1)` |
 
 ### 9.2 Capas Transparentes y Borrador Real
 
-| Cambio | Descripcion |
+| Cambio | Descripción |
 |---|---|
 | Capas transparentes | `createLayerCanvas()` no rellena con blanco. `renderComposite()` provee fondo blanco visual |
 | Fondo sin blanco solido | La capa "Fondo" ya no tiene relleno blanco opaco (causaba que al reordenar capas el Fondo tapara todo) |
@@ -564,7 +564,7 @@ D:\Free Animation Power WEB\programa de dibujo\
 
 ### 9.3 UI y Experiencia de Usuario
 
-| Cambio | Descripcion |
+| Cambio | Descripción |
 |---|---|
 | Iconos de pinceles | 34 iconos nuevos para acuarela y oleo. Fallback a texto si no hay PNG |
 | Categorias con fondo | Bloques de pinceles con fondos alternados (`bg-tertiary`/`bg-secondary`) |
@@ -573,9 +573,9 @@ D:\Free Animation Power WEB\programa de dibujo\
 | Botones de capa | Rediseno en 4 bloques: Opacidad, Nueva+Imagen, Duplicar+Eliminar, Subir+Bajar |
 | Nombres completos | Botones con nombres legibles (Duplicar, Eliminar, Subir, Bajar, Imagen) |
 
-### 9.4 Importacion y Exportacion
+### 9.4 Importacion y Exportación
 
-| Funcionalidad | Descripcion |
+| Funcionalidad | Descripción |
 |---|---|
 | Importar Imagen | Boton "Imagen" + `Ctrl+I`. PNG/JPG/WebP como nueva capa, escalada y centrada |
 | Export PNG | `Ctrl+Shift+P` |
@@ -586,21 +586,21 @@ D:\Free Animation Power WEB\programa de dibujo\
 
 ### 9.5 Sistema de Debug
 
-| Componente | Descripcion |
+| Componente | Descripción |
 |---|---|
 | Panel DEBUG | `Ctrl+Shift+D` activa panel flotante + logs en consola |
 | Trazado de pinceles | Muestra ruta de renderizado (water/oil → original → default) |
 | Verificacion de canvas | Detecta `globalAlpha`/`compositeOperation`/`shadowBlur` sucios |
-| Actualizacion optimizada | Solo 1 DOM update por trazo (al final), no por segmento |
+| Actualización optimizada | Solo 1 DOM update por trazo (al final), no por segmento |
 
 ### 9.6 Herramienta Mover (eliminada)
 
 Se implemento y elimino una herramienta de desplazamiento de objetos (tecla V) con:
-- Seleccion por rectangulo (marquee)
+- Selección por rectangulo (marquee)
 - Varita magica (flood-fill BFS)
 - Escaneo lineal de capa completa
 
-Se elimino por complejizar el sistema y causar inestabilidad. Se retomara en version futura.
+Se elimino por complejizar el sistema y causar inestabilidad. Se retomara en versión futura.
 
 ### 9.7 Renombrado
 
