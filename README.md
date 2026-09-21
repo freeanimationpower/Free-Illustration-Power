@@ -577,7 +577,7 @@ D:\Free Animation Power WEB\programa de dibujo\
 
 | Funcionalidad | Descripción |
 |---|---|
-| Importar Imagen | Boton "Imagen" + `Ctrl+I`. PNG/JPG/WebP como nueva capa, escalada y centrada |
+| Importar Imagen | Botón "Imagen" + `Ctrl+I`. PNG/JPG/WebP como nueva capa, escalada y centrada |
 | Export PNG | `Ctrl+Shift+P` |
 | Export JPG | `Ctrl+Shift+J` (calidad 92%) |
 | Export EPS | `Ctrl+Shift+E` (PostScript nivel 2 con JPEG embebido via DCTDecode) |
